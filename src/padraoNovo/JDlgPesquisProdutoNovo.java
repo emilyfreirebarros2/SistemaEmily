@@ -5,6 +5,9 @@
  */
 package padraoNovo;
 
+import controles.PesquisarProduto_efb;
+import dao.ProdutoDao_efb;
+import java.util.List;
 import telas.*;
 import javax.swing.JOptionPane;
 import tools.Util;
@@ -14,15 +17,22 @@ public class JDlgPesquisProdutoNovo extends javax.swing.JDialog {
     /**
      * Creates new form JDlgPesquisaCliente
      */
-    JDlgProdutoNovo jDlgProduto;
+    JDlgProdutoIA jDlgProduto;
     Util util;
+    PesquisarProduto_efb pesquisarProduto_efb;
+    ProdutoDao_efb produtoDao;
 
     public JDlgPesquisProdutoNovo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Cliente");
+        pesquisarProduto_efb = new PesquisarProduto_efb();
+        produtoDao = new ProdutoDao_efb();
 
+        List lista = produtoDao.listAll();
+        pesquisarProduto_efb.setList(lista);
+        jTable1.setModel(pesquisarProduto_efb);
     }
 
     /**
@@ -61,6 +71,11 @@ public class JDlgPesquisProdutoNovo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnExcluir_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete.png"))); // NOI18N
@@ -84,30 +99,28 @@ public class JDlgPesquisProdutoNovo extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jBtnOk_efb)
-                        .addGap(31, 31, 31)
-                        .addComponent(jBtnAlterar_efb)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jBtnExcluir_efb))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(234, Short.MAX_VALUE)
+                .addComponent(jBtnOk_efb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBtnAlterar_efb)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jBtnExcluir_efb)
+                .addGap(201, 201, 201))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnOk_efb)
-                        .addComponent(jBtnAlterar_efb))
-                    .addComponent(jBtnExcluir_efb))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnExcluir_efb)
+                    .addComponent(jBtnAlterar_efb)
+                    .addComponent(jBtnOk_efb))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,25 +129,45 @@ public class JDlgPesquisProdutoNovo extends javax.swing.JDialog {
 
     private void jBtnOk_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk_efbActionPerformed
         // TODO add your handling code here:
-        JDlgProdutoNovo jDlgProdutoNovo = new JDlgProdutoNovo(null, true);
+        JDlgProdutoIA jDlgProdutoNovo = new JDlgProdutoIA(null, true);
         jDlgProdutoNovo.setTelaAnterior(this);
+        jDlgProdutoNovo.setTitle("Incluindo");
         jDlgProdutoNovo.setVisible(true);
     }//GEN-LAST:event_jBtnOk_efbActionPerformed
 
     private void jBtnExcluir_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_efbActionPerformed
         // TODO add your handling code here:
-        JDlgProdutoNovo jDlgProdutoNovo = new JDlgProdutoNovo(null, true);
-        jDlgProdutoNovo.setTelaAnterior(this);
-        jDlgProdutoNovo.setVisible(true);
 
+        if (jTable1.getSelectedRow() == -1) {
+            util.mensagem("Selecione uma linha para exclusão!");
+        } else {
+            int linSele = jTable1.getSelectedRow();
+            produtoDao.delete(pesquisarProduto_efb.getProduto(linSele));
+            pesquisarProduto_efb.removeList(linSele);
+        }
     }//GEN-LAST:event_jBtnExcluir_efbActionPerformed
 
     private void jBtnAlterar_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_efbActionPerformed
         // TODO add your handling code here:
-        JDlgProdutoNovo jDlgProdutoNovo = new JDlgProdutoNovo(null, true);
-        jDlgProdutoNovo.setTelaAnterior(this);
-        jDlgProdutoNovo.setVisible(true);
+        if (jTable1.getSelectedRow() == -1) {
+            util.mensagem("Selecione uma linha Para alterar!");
+        } else {
+            JDlgProdutoIA jDlgProdutoNovo = new JDlgProdutoIA(null, true);
+            jDlgProdutoNovo.setTelaAnterior(this);
+            jDlgProdutoNovo.setTitle("Alterando");
+            jDlgProdutoNovo.beanView(pesquisarProduto_efb.getProduto(jTable1.getSelectedRow()));
+            jDlgProdutoNovo.setVisible(true);
+        }
     }//GEN-LAST:event_jBtnAlterar_efbActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+
+            List lista = produtoDao.listAll();
+            pesquisarProduto_efb.setList(lista);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments

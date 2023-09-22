@@ -5,6 +5,11 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -62,4 +67,34 @@ public class Util {
         return JOptionPane.showConfirmDialog(null, msg, "Pergunta", JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE) == JOptionPane.YES_OPTION;
 
     }
+
+    public static int paraInteiro(String cad) {
+        return Integer.valueOf(cad);
+    }
+
+    public static String paraString(int num) {
+        return String.valueOf(num);
+    }
+    public static String dbStr(double num) {
+        return String.valueOf(num);
+    }
+
+    public static double paraDouble(String cad) {
+        return Double.valueOf(cad);
+    }
+
+  /*  public static Date paraData(String data) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); // Especifique o formato da data aqui
+        try {
+            return dateFormat.parse(data);
+        } catch (ParseException ex) {
+            Logger.getLogger(Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }*/
+
+    public static String dataParaString(Date data) {
+        return String.valueOf(data);
+    }
+
 }

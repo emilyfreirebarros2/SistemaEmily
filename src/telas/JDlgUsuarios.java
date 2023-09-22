@@ -5,6 +5,8 @@
  */
 package telas;
 
+import bean.UsuarioEfb;
+import dao.UsuarioDao_efb;
 import tools.Util;
 
 /**
@@ -19,6 +21,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
      */
     boolean incluindo;
     Util util;
+    UsuarioDao_efb usuarioDao;
+    UsuarioEfb usuario;
 
     public JDlgUsuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -28,6 +32,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         habilitar(false);
         limpar();
         incluindo = false;
+        usuario = new UsuarioEfb();
+        usuarioDao = new UsuarioDao_efb();
     }
 
     public void habilitar(boolean valor) {
@@ -36,8 +42,8 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 jTxtNome_efb,
                 jTxtApelido_efb,
                 jChbAtivo_efb,
-                
                 jCmbNivel_efb,
+                jTxtSenha_efb,
                 jBtnCancelar_efb,
                 jBtnConfirmar_efb);
 
@@ -54,9 +60,30 @@ public class JDlgUsuarios extends javax.swing.JDialog {
                 jTxtNome_efb,
                 jTxtApelido_efb,
                 jChbAtivo_efb,
-                jTxtSenha_efb);
-       
+                jTxtSenha_efb,
+                jCmbNivel_efb
+        );
 
+    }
+
+    public void beanView(UsuarioEfb usuario) {
+        jTxtCodigo_efb.setText(util.paraString(usuario.getIdusuarioEfb()));
+        jTxtNome_efb.setText(usuario.getNomeEfb());
+        jTxtSenha_efb.setText(usuario.getSenhaEfb());
+        jCmbNivel_efb.setSelectedItem(usuario.getNivelEfb());
+        jTxtApelido_efb.setText(usuario.getApelidoEfb());
+        jChbAtivo_efb.setSelected(usuario.getAtivoEfb().equals("Sim"));
+    }
+
+    public UsuarioEfb viewBean() {
+
+        usuario.setIdusuarioEfb(util.paraInteiro(jTxtCodigo_efb.getText()));
+        usuario.setNomeEfb(jTxtNome_efb.getText());
+        usuario.setSenhaEfb(jTxtSenha_efb.getText());
+        usuario.setNivelEfb((String) jCmbNivel_efb.getSelectedItem());
+        usuario.setApelidoEfb(jTxtApelido_efb.getText());
+        usuario.setAtivoEfb(jChbAtivo_efb.isSelected() ? "Sim" : "Não");
+        return usuario;
     }
 
     /**
@@ -263,6 +290,7 @@ public class JDlgUsuarios extends javax.swing.JDialog {
 
     private void jBtnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPesquisarActionPerformed
         // TODO add your handling code here:
+        usuario = new UsuarioEfb();
         JDlgPesquisaUsuario jDlgPesquisausuario = new JDlgPesquisaUsuario(null, true);
         jDlgPesquisausuario.setTelaAnterior(this);
         jDlgPesquisausuario.setVisible(true);
@@ -273,24 +301,42 @@ public class JDlgUsuarios extends javax.swing.JDialog {
         habilitar(true);
         limpar();
         incluindo = true;
+        usuario = new UsuarioEfb();
     }//GEN-LAST:event_jBtnIncluir_efbActionPerformed
 
     private void jBtnAlterar_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_efbActionPerformed
         // TODO add your handling code here:
         habilitar(true);
-      
+        incluindo = false;
+        jTxtCodigo_efb.setEnabled(false);
+
     }//GEN-LAST:event_jBtnAlterar_efbActionPerformed
 
     private void jBtnExcluir_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_efbActionPerformed
         // TODO add your handling code here:
 
+        if (util.pergunta("Quer mesmo excluir")) {
+            usuario = viewBean();
+            usuarioDao.delete(usuario);
+        } else {
+            util.mensagem("Exclusão cancelada");
+        }
         habilitar(false);
         limpar();
     }//GEN-LAST:event_jBtnExcluir_efbActionPerformed
 
     private void jBtnConfirmar_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConfirmar_efbActionPerformed
         // TODO add your handling code here:
+        usuario = viewBean();
+        if (usuario != null) {
+            if (incluindo == true) {
+                usuarioDao.insert(usuario);
+            } else {
+                usuarioDao.update(usuario);
+            }
+        }
         incluindo = false;
+        usuario = null;
         habilitar(false);
         limpar();
     }//GEN-LAST:event_jBtnConfirmar_efbActionPerformed

@@ -5,6 +5,9 @@
  */
 package padraoNovo;
 
+import controles.PesquisarVendedor_efb;
+import dao.VendedorDao_efb;
+import java.util.List;
 import telas.*;
 import javax.swing.JOptionPane;
 import tools.Util;
@@ -15,19 +18,22 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
      * Creates new form JDlgPesquis.f
      */
     Util util;
-    JDlgVendedorNovo jDlgVendedor;
+    JDlgVendedorIA jDlgVendedor;
+    PesquisarVendedor_efb pesquisarVendedor;
+    VendedorDao_efb vendedorDao_efb;
 
     public JDlgPesquisaVendedorNovo(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar.f");
+        pesquisarVendedor = new PesquisarVendedor_efb();
+        vendedorDao_efb = new VendedorDao_efb();
 
-    }
-
-    public void setTelaAnterior(JDlgVendedorNovo jDlgVendedor) {
-        this.jDlgVendedor = jDlgVendedor;
-
+        List lista = vendedorDao_efb.listAll();
+        pesquisarVendedor.setList(lista);
+        jTable1.setModel(pesquisarVendedor);
+        pesquisarVendedor.fireTableDataChanged();
     }
 
     /**
@@ -42,7 +48,7 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jBtnAlterar_efb = new javax.swing.JButton();
-        jBtnOk_efb = new javax.swing.JButton();
+        jBtnIncluir_efb = new javax.swing.JButton();
         jBtnExcluir_efb = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -58,6 +64,11 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         jBtnAlterar_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alterar.png"))); // NOI18N
@@ -68,11 +79,11 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
             }
         });
 
-        jBtnOk_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inserir.png"))); // NOI18N
-        jBtnOk_efb.setText("Incluir");
-        jBtnOk_efb.addActionListener(new java.awt.event.ActionListener() {
+        jBtnIncluir_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/inserir.png"))); // NOI18N
+        jBtnIncluir_efb.setText("Incluir");
+        jBtnIncluir_efb.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnOk_efbActionPerformed(evt);
+                jBtnIncluir_efbActionPerformed(evt);
             }
         });
 
@@ -89,28 +100,27 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(2, 2, 2)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jBtnOk_efb)
-                .addGap(31, 31, 31)
-                .addComponent(jBtnAlterar_efb)
+                .addGap(58, 58, 58)
+                .addComponent(jBtnIncluir_efb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBtnAlterar_efb)
+                .addGap(101, 101, 101)
                 .addComponent(jBtnExcluir_efb)
-                .addContainerGap())
+                .addGap(136, 136, 136))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(2, 2, 2)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 682, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 363, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jBtnOk_efb)
-                        .addComponent(jBtnAlterar_efb))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnAlterar_efb)
+                    .addComponent(jBtnIncluir_efb)
                     .addComponent(jBtnExcluir_efb))
                 .addContainerGap())
         );
@@ -120,24 +130,43 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
 
     private void jBtnAlterar_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAlterar_efbActionPerformed
         // TODO add your handling code here:
-        JDlgVendedorNovo jDlgVendedorNovo = new JDlgVendedorNovo(null, true);
-        jDlgVendedorNovo.setTelaAnterior(this);
-        jDlgVendedorNovo.setVisible(true);
+        if (jTable1.getSelectedRow() == -1) {
+            util.mensagem("Selcione uma linha antes");
+        } else {
+            JDlgVendedorIA jDlgVendedorNovo = new JDlgVendedorIA(null, true);
+            jDlgVendedorNovo.setTelaAnterior(this);
+            jDlgVendedorNovo.setTitle("Alterando");
+            jDlgVendedorNovo.beanView(pesquisarVendedor.getVendedor(jTable1.getSelectedRow()));
+            jDlgVendedorNovo.setVisible(true);
+        }
+
     }//GEN-LAST:event_jBtnAlterar_efbActionPerformed
 
-    private void jBtnOk_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOk_efbActionPerformed
+    private void jBtnIncluir_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnIncluir_efbActionPerformed
         // TODO add your handling code here:
-        JDlgVendedorNovo jDlgVendedorNovo = new JDlgVendedorNovo(null, true);
+        JDlgVendedorIA jDlgVendedorNovo = new JDlgVendedorIA(null, true);
         jDlgVendedorNovo.setTelaAnterior(this);
+        jDlgVendedorNovo.setTitle("Incluindo");
         jDlgVendedorNovo.setVisible(true);
-    }//GEN-LAST:event_jBtnOk_efbActionPerformed
+
+    }//GEN-LAST:event_jBtnIncluir_efbActionPerformed
 
     private void jBtnExcluir_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnExcluir_efbActionPerformed
         // TODO add your handling code here:
-        JDlgVendedorNovo jDlgVendedorNovo = new JDlgVendedorNovo(null, true);
-        jDlgVendedorNovo.setTelaAnterior(this);
-        jDlgVendedorNovo.setVisible(true);
+        if (jTable1.getSelectedRow() == -1) {
+            util.mensagem("Selecione uma linha antes");
+        } else {
+            vendedorDao_efb.delete(pesquisarVendedor.getVendedor(jTable1.getSelectedRow()));
+        }
     }//GEN-LAST:event_jBtnExcluir_efbActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            List lita = vendedorDao_efb.listAll();
+            pesquisarVendedor.setList(lita);
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -311,7 +340,7 @@ public class JDlgPesquisaVendedorNovo extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnAlterar_efb;
     private javax.swing.JButton jBtnExcluir_efb;
-    private javax.swing.JButton jBtnOk_efb;
+    private javax.swing.JButton jBtnIncluir_efb;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables

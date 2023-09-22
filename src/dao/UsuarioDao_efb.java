@@ -5,7 +5,11 @@
  */
 package dao;
 
+import bean.UsuarioEfb;
+import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -45,7 +49,24 @@ public class UsuarioDao_efb extends Dao_Abstract {
 
     @Override
     public List listAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(UsuarioEfb.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
 
+    public UsuarioEfb Logar(String usuario, String senha) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(UsuarioEfb.class);
+        criteria.add(Restrictions.eq("apelidoEfb", usuario));
+        criteria.add(Restrictions.eq("senhaEfb", senha));//sql
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        if (!lista.isEmpty()) {
+            return (UsuarioEfb) lista.get(0); // Retorna a lista
+        } else {
+            return null; // retorna vazio pois não achou nada
+        }
+    }
 }

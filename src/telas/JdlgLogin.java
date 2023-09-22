@@ -5,6 +5,9 @@
  */
 package telas;
 
+import bean.UsuarioEfb;
+import dao.UsuarioDao_efb;
+import java.util.List;
 import tools.Util;
 
 /**
@@ -17,11 +20,14 @@ public class JdlgLogin extends javax.swing.JDialog {
      * Creates new form loginn
      */
     Util util;
+    UsuarioEfb usuario;
+
     public JdlgLogin(java.awt.Frame parent, boolean modal) {
 
         initComponents();
         setTitle("Login");
         setLocationRelativeTo(null);
+        usuario = new UsuarioEfb();
     }
 
     /**
@@ -133,12 +139,23 @@ public class JdlgLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_jTxtUsuario_efbActionPerformed
 
     private void jBtnLogin_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnLogin_efbActionPerformed
-        if(jTxtUsuario_efb.getText().trim().equals("Emy") && jPswSenha_efb.getText().trim().equals("123")){
-        JFrmPrincipal jFrmPrincipal=new JFrmPrincipal();
-        jFrmPrincipal.setVisible(true);
-    }else{
-            util.mensagem("Acesso Negadoo");
+        usuario = new UsuarioEfb();
+        UsuarioDao_efb usuarioDAO = new UsuarioDao_efb();
+        UsuarioEfb usuarioLogado = usuarioDAO.Logar(jTxtUsuario_efb.getText(), jPswSenha_efb.getText());
+
+        if (usuarioLogado != null) {
+            util.mensagem("ACESSO Ok");
+            JFrmPrincipal jFrmTela = new JFrmPrincipal();
+            jFrmTela.setVisible(true);
+        } else if ((jTxtUsuario_efb.getText().equals("Emily") && jPswSenha_efb.getText().equals("1234"))
+                || (jTxtUsuario_efb.getText().equals("Maquiagem") && jPswSenha_efb.getText().equals("12345"))) {
+            util.mensagem("ACESSO Ok");
+            JFrmPrincipal jFrmTela = new JFrmPrincipal();
+            jFrmTela.setVisible(true);
+        } else {
+            util.mensagem("ACESSO Negado");
         }
+
     }//GEN-LAST:event_jBtnLogin_efbActionPerformed
 
     private void jBtnSair_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSair_efbActionPerformed

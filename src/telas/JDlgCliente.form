@@ -38,11 +38,11 @@
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jFmtCpf" min="-2" pref="208" max="-2" attributes="0"/>
+                              <Component id="jFmtCpf_efb" min="-2" pref="208" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFmtRg" min="-2" pref="97" max="-2" attributes="0"/>
+                                  <Component id="jFmtRg_efb" min="-2" pref="97" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -52,7 +52,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jFmtCep" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
+                                  <Component id="jFmtCep_efb" alignment="0" min="-2" pref="131" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -81,7 +81,7 @@
                               </Group>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jFmtDatadeNascimento" min="-2" pref="159" max="-2" attributes="0"/>
+                                  <Component id="jFmtDatadeNascimento_efb" min="-2" pref="159" max="-2" attributes="0"/>
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -99,9 +99,9 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jFmtTelefone1" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="jFmtTelefone_efb" min="-2" pref="135" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jFmtCelular" min="-2" pref="135" max="-2" attributes="0"/>
+                      <Component id="jFmtCelular_efb" min="-2" pref="135" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
@@ -135,7 +135,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jTxtNome_efb" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFmtDatadeNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFmtDatadeNascimento_efb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -159,8 +159,8 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jFmtRg" min="-2" max="-2" attributes="0"/>
-                          <Component id="jFmtCpf" min="-2" pref="29" max="-2" attributes="0"/>
+                          <Component id="jFmtRg_efb" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFmtCpf_efb" min="-2" pref="29" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -175,7 +175,7 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jFmtCep" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFmtCep_efb" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jTxtCidade_efb" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -189,8 +189,8 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jTxtEmail_efb" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFmtCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jFmtTelefone1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFmtCelular_efb" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jFmtTelefone_efb" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
@@ -426,17 +426,17 @@
         <Property name="text" type="java.lang.String" value="Email:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtDatadeNascimento">
+    <Component class="javax.swing.JFormattedTextField" name="jFmtDatadeNascimento_efb">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtRg">
+    <Component class="javax.swing.JFormattedTextField" name="jFmtRg_efb">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtCpf">
+    <Component class="javax.swing.JFormattedTextField" name="jFmtCpf_efb">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtCelular">
+    <Component class="javax.swing.JFormattedTextField" name="jFmtCelular_efb">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtTelefone1">
+    <Component class="javax.swing.JFormattedTextField" name="jFmtTelefone_efb">
     </Component>
-    <Component class="javax.swing.JFormattedTextField" name="jFmtCep">
+    <Component class="javax.swing.JFormattedTextField" name="jFmtCep_efb">
     </Component>
   </SubComponents>
 </Form>

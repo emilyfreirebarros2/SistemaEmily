@@ -5,6 +5,9 @@
  */
 package telas;
 
+import controles.PesquisarUsuario_efb;
+import dao.UsuarioDao_efb;
+import java.util.List;
 import javax.swing.JOptionPane;
 import tools.Util;
 
@@ -15,6 +18,8 @@ public class JDlgPesquisaUsuario extends javax.swing.JDialog {
      */
     JDlgUsuarios jDlgUsuarios;
     Util util;
+    PesquisarUsuario_efb pesquisarUsuario;
+    UsuarioDao_efb usuarioDao;
 
     public JDlgPesquisaUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -22,6 +27,12 @@ public class JDlgPesquisaUsuario extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setTitle("Pesquisar Cliente");
 
+        pesquisarUsuario = new PesquisarUsuario_efb();
+        usuarioDao = new UsuarioDao_efb();
+
+        List lista = usuarioDao.listAll();
+        pesquisarUsuario.setList(lista);
+        jTable1.setModel(pesquisarUsuario);
     }
 
     public void setTelaAnterior(JDlgUsuarios jDlgUsuarios) {
@@ -109,7 +120,9 @@ public class JDlgPesquisaUsuario extends javax.swing.JDialog {
         if (jTable1.getSelectedRow() == -1) {
             JOptionPane.showMessageDialog(this, "Selecione uma linha!");
         }
-
+        int linSelect = jTable1.getSelectedRow();
+        jDlgUsuarios.usuario = pesquisarUsuario.getUsuaruio(linSelect);
+        jDlgUsuarios.beanView(jDlgUsuarios.usuario);
         setVisible(false);
     }//GEN-LAST:event_jBtnOk_efbActionPerformed
 

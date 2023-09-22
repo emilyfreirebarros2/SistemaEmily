@@ -7,8 +7,6 @@ package telas;
 
 import padraoNovo.JDlgPesquisProdutoNovo;
 import padraoNovo.JDlgPesquisaVendedorNovo;
-import padraoNovo.JDlgProdutoNovo;
-import padraoNovo.JDlgVendedorNovo;
 
 /**
  *
@@ -38,14 +36,11 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1_efb = new javax.swing.JMenu();
         jMnuUsuarios_efb = new javax.swing.JMenuItem();
-        jMnuVendedor_efb = new javax.swing.JMenuItem();
-        jMnuProduto_efb = new javax.swing.JMenuItem();
         jMnuCliente_efb = new javax.swing.JMenuItem();
+        jMnuProduto_efb2 = new javax.swing.JMenuItem();
+        jMnuVendedor_efb2 = new javax.swing.JMenuItem();
         jSeparator1_efb = new javax.swing.JPopupMenu.Separator();
         jMnuSair_efb = new javax.swing.JMenuItem();
-        jMenu2_efb = new javax.swing.JMenu();
-        jMnuVendedor_efb1 = new javax.swing.JMenuItem();
-        jMnuProduto_efb1 = new javax.swing.JMenuItem();
         jMenu3_efb = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -64,28 +59,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         });
         jMenu1_efb.add(jMnuUsuarios_efb);
 
-        jMnuVendedor_efb.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuVendedor_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vendedor.png"))); // NOI18N
-        jMnuVendedor_efb.setMnemonic('V');
-        jMnuVendedor_efb.setText("Vendedor");
-        jMnuVendedor_efb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuVendedor_efbActionPerformed(evt);
-            }
-        });
-        jMenu1_efb.add(jMnuVendedor_efb);
-
-        jMnuProduto_efb.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuProduto_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produtos.png"))); // NOI18N
-        jMnuProduto_efb.setMnemonic('P');
-        jMnuProduto_efb.setText("Produto");
-        jMnuProduto_efb.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuProduto_efbActionPerformed(evt);
-            }
-        });
-        jMenu1_efb.add(jMnuProduto_efb);
-
         jMnuCliente_efb.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         jMnuCliente_efb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/clientes.png"))); // NOI18N
         jMnuCliente_efb.setMnemonic('c');
@@ -96,6 +69,28 @@ public class JFrmPrincipal extends javax.swing.JFrame {
             }
         });
         jMenu1_efb.add(jMnuCliente_efb);
+
+        jMnuProduto_efb2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuProduto_efb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produtos.png"))); // NOI18N
+        jMnuProduto_efb2.setMnemonic('P');
+        jMnuProduto_efb2.setText("Produto Novo");
+        jMnuProduto_efb2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuProduto_efb2ActionPerformed(evt);
+            }
+        });
+        jMenu1_efb.add(jMnuProduto_efb2);
+
+        jMnuVendedor_efb2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMnuVendedor_efb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vendedor.png"))); // NOI18N
+        jMnuVendedor_efb2.setMnemonic('V');
+        jMnuVendedor_efb2.setText("Vendedor Novo");
+        jMnuVendedor_efb2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMnuVendedor_efb2ActionPerformed(evt);
+            }
+        });
+        jMenu1_efb.add(jMnuVendedor_efb2);
         jMenu1_efb.add(jSeparator1_efb);
 
         jMnuSair_efb.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_MASK));
@@ -110,33 +105,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jMenu1_efb.add(jMnuSair_efb);
 
         jMenuBar1.add(jMenu1_efb);
-
-        jMenu2_efb.setMnemonic('M');
-        jMenu2_efb.setText("Telas Padrão Novo");
-
-        jMnuVendedor_efb1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuVendedor_efb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/vendedor.png"))); // NOI18N
-        jMnuVendedor_efb1.setMnemonic('V');
-        jMnuVendedor_efb1.setText("Vendedor Novo");
-        jMnuVendedor_efb1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuVendedor_efb1ActionPerformed(evt);
-            }
-        });
-        jMenu2_efb.add(jMnuVendedor_efb1);
-
-        jMnuProduto_efb1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_MASK));
-        jMnuProduto_efb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/produtos.png"))); // NOI18N
-        jMnuProduto_efb1.setMnemonic('P');
-        jMnuProduto_efb1.setText("Produto Novo");
-        jMnuProduto_efb1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMnuProduto_efb1ActionPerformed(evt);
-            }
-        });
-        jMenu2_efb.add(jMnuProduto_efb1);
-
-        jMenuBar1.add(jMenu2_efb);
 
         jMenu3_efb.setText("Movimento");
         jMenuBar1.add(jMenu3_efb);
@@ -162,16 +130,6 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         jDlgUsuarios.setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_jMnuUsuarios_efbActionPerformed
 
-    private void jMnuVendedor_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendedor_efbActionPerformed
-        JDlgVendedor jDlgVendedor = new JDlgVendedor(null, true);
-        jDlgVendedor.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMnuVendedor_efbActionPerformed
-
-    private void jMnuProduto_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProduto_efbActionPerformed
-        JDlgProduto jDlgProduto = new JDlgProduto(null, true);
-        jDlgProduto.setVisible(true);        // TODO add your handling code here:
-    }//GEN-LAST:event_jMnuProduto_efbActionPerformed
-
     private void jMnuSair_efbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSair_efbActionPerformed
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_jMnuSair_efbActionPerformed
@@ -182,17 +140,17 @@ public class JFrmPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMnuCliente_efbActionPerformed
 
-    private void jMnuVendedor_efb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendedor_efb1ActionPerformed
+    private void jMnuProduto_efb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProduto_efb2ActionPerformed
         // TODO add your handling code here:
-        JDlgPesquisaVendedorNovo jDlgVendedor = new JDlgPesquisaVendedorNovo(null, true);
-        jDlgVendedor.setVisible(true);
-    }//GEN-LAST:event_jMnuVendedor_efb1ActionPerformed
+        JDlgPesquisProdutoNovo jDlgPesquisProdutoNovo=new JDlgPesquisProdutoNovo(null,true);
+        jDlgPesquisProdutoNovo.setVisible(true);
+    }//GEN-LAST:event_jMnuProduto_efb2ActionPerformed
 
-    private void jMnuProduto_efb1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuProduto_efb1ActionPerformed
+    private void jMnuVendedor_efb2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendedor_efb2ActionPerformed
         // TODO add your handling code here:
-        JDlgPesquisProdutoNovo jDlgProduto = new JDlgPesquisProdutoNovo(null, true);
-        jDlgProduto.setVisible(true);
-    }//GEN-LAST:event_jMnuProduto_efb1ActionPerformed
+        JDlgPesquisaVendedorNovo jDlgPesquisaVendedorNovo=new JDlgPesquisaVendedorNovo(null, true);
+        jDlgPesquisaVendedorNovo.setVisible(true);
+    }//GEN-LAST:event_jMnuVendedor_efb2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,16 +189,13 @@ public class JFrmPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1_efb;
-    private javax.swing.JMenu jMenu2_efb;
     private javax.swing.JMenu jMenu3_efb;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMnuCliente_efb;
-    private javax.swing.JMenuItem jMnuProduto_efb;
-    private javax.swing.JMenuItem jMnuProduto_efb1;
+    private javax.swing.JMenuItem jMnuProduto_efb2;
     private javax.swing.JMenuItem jMnuSair_efb;
     private javax.swing.JMenuItem jMnuUsuarios_efb;
-    private javax.swing.JMenuItem jMnuVendedor_efb;
-    private javax.swing.JMenuItem jMnuVendedor_efb1;
+    private javax.swing.JMenuItem jMnuVendedor_efb2;
     private javax.swing.JPopupMenu.Separator jSeparator1_efb;
     // End of variables declaration//GEN-END:variables
 }

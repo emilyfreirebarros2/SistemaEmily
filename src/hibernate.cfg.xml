@@ -43,9 +43,9 @@ Contributor(s):
   <session-factory>
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="hibernate.connection.url">jdbc:mysql://10.0.7.51:33062/db_emily_barros?zeroDateTimeBehavior=convertToNull</property>
-    <property name="hibernate.connection.username">emily_barros</property>
-    <property name="hibernate.connection.password">emily_barros</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/db_emily_barros?zeroDateTimeBehavior=convertToNull</property>
+    <property name="hibernate.connection.username">root</property>
+    <property name="hibernate.connection.password"></property>
     <mapping class="bean.VendaProdutoEfb"/>
     <mapping class="bean.ClienteEfb"/>
     <mapping class="bean.ProdutoEfb"/>

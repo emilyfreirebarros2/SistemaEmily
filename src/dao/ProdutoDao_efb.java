@@ -5,7 +5,9 @@
  */
 package dao;
 
+import bean.ProdutoEfb;
 import java.util.List;
+import org.hibernate.Criteria;
 
 /**
  *
@@ -45,7 +47,10 @@ public class ProdutoDao_efb extends Dao_Abstract {
 
     @Override
     public List listAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(ProdutoEfb.class);
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
     }
-
 }
